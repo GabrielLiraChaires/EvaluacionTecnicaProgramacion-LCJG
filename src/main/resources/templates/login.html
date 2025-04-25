@@ -10,11 +10,10 @@
 <body>
 <div class="login">
     <div class="h-screen w-screen flex flex-col xl:flex-row justify-center items-center relative overflow-x-hidden overflow-y-auto">
-        <!-- Contenedor del video -->
-        <div class="h-screen w-full xl:w-1/2 flex justify-center items-center relative xl:rounded-tr-[700px] xl:rounded-br-[700px] overflow-hidden bg-transparent contenedor-Video">
-            <video autoplay class="absolute top-0 left-0 w-full h-full object-cover xl:rounded-tr-[700px] xl:rounded-br-[700px]" loop muted playsinline>
-                <source th:src="@{/videos/presentacion.mp4}" type="video/mp4">
-            </video>
+        <!-- Contenedor de la imagen -->
+        <div class="h-screen w-full xl:w-1/2 flex justify-center items-center relative xl:rounded-tr-[700px] xl:rounded-br-[700px] overflow-hidden bg-transparent contenedor-Imagen">
+            <img src="/images/presentacion.png" alt="Imagen de presentación"
+                 class="absolute top-0 left-0 w-full h-full object-cover xl:rounded-tr-[700px] xl:rounded-br-[700px]">
         </div>
 
         <!-- Contenedor del formulario -->
