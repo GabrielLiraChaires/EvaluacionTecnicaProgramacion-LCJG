@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Personalizaciones adicionales */
+@layer components {
+    .custom-alert {
+        @apply p-3 rounded-md border font-medium;
+    }
+
+    .btn-primary {
+        @apply bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-all duration-200;
+    }
+
+    .login {
+        background-color: #000000; /* Fallback */
+        background-image: linear-gradient(
+                135deg,
+                #808080 0%,    /* Gris medio */
+                #606060 30%,   /* Gris oscuro */
+                #303030 65%,   /* Gris muy oscuro */
+                #000000 100%   /* Negro puro */
+        );
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}

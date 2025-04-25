@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Movimientos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-8">
+        <div class="mb-8">
+            <!-- Enlace dinámico según el rol -->
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <a th:href="@{/administrador/dashboard}" sec:authorize="hasRole('Administrador')" class="text-blue-600 hover:text-blue-800 font-semibold transition-colors flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+                        </svg>
+                        Volver al panel
+                    </a>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Historial de  Movimientos
+                </h1>
+            </div>
+        </div>
+
+        <!-- Filtro -->
+        <form method="get" th:action="@{/administrador/movimientos}" class="mb-4 flex items-center gap-4">
+            <label for="tipo" class="font-semibold text-gray-700">Filtrar por tipo:</label>
+            <select name="tipo" id="tipo" class="border rounded px-3 py-2 text-sm text-gray-700">
+                <option value="">Todos</option>
+                <option value="Entrada" th:selected="${tipoSeleccionado == 'Entrada'}">Entrada</option>
+                <option value="Salida" th:selected="${tipoSeleccionado == 'Salida'}">Salida</option>
+            </select>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                Filtrar
+            </button>
+        </form>
+
+        <!-- Tabla de movimientos -->
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200">
+            <div class="overflow-x-auto overflow-y-auto max-h-[90vh] scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 hover:scrollbar-thumb-gray-400">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50 sticky top-0 z-10">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                                Tipo de Movimiento
+                            </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                                Producto
+                            </th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700 uppercase tracking-wider bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                                Responsable
+                            </th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700 uppercase tracking-wider bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                                Cantidad
+                            </th>
+                            <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700 uppercase tracking-wider bg-white/80 backdrop-blur-sm border-b border-gray-200">
+                                Fecha y Hora de Movimiento
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr th:if="${#lists.isEmpty(movimientos)}">
+                            <td colspan="5" class="px-6 py-8 text-center text-gray-500 text-lg">
+                                No existen movimientos registrados.
+                            </td>
+                        </tr>
+                        <tr th:each="movimiento : ${movimientos}" th:unless="${#lists.isEmpty(movimientos)}"
+                            class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" th:text="${movimiento.tipoMovimiento}"></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" th:text="${movimiento.producto?.nombre}"></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                th:text="${movimiento.usuario.nombre + ' - ' + movimiento.usuario.rol.descripcion}"></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                                        <span th:text="${movimiento.cantidad}"></span> unidades
+                                    </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500"
+                                th:text="${#temporals.format(movimiento.fechaMovimiento, 'dd/MM/yyyy HH:mm')}">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

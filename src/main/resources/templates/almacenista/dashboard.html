@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Almacen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<div class="w-full max-w-7xl mx-auto p-12 relative">
+    <!-- Botón de Cerrar Sesión -->
+    <form th:action="@{/logout}" method="post" class="absolute top-4 right-4">
+        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
+            Cerrar Sesión
+        </button>
+    </form>
+
+    <h1 class="text-5xl font-black text-center mb-16 text-gray-900 mt-5">ALMACEN</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Módulo Inventario -->
+        <a th:href="@{/inventario}" class="block transform transition hover:scale-105 hover:rotate-1 duration-300">
+            <div class="h-[450px] bg-white rounded-3xl shadow-2xl flex flex-col items-center justify-center p-10">
+                <div class="bg-blue-100 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-4xl">
+                    📦
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-4">Inventario Total</h2>
+                <p class="text-xl text-gray-600 text-center leading-relaxed">
+                    Invetario completo de productos.
+                </p>
+            </div>
+        </a>
+
+        <!-- Módulo Salida de Almacen -->
+        <a th:href="@{/almacenista/almacen}" class="block transform transition hover:scale-105 hover:-rotate-1 duration-300">
+            <div class="h-[450px] bg-white rounded-3xl shadow-2xl flex flex-col items-center justify-center p-10">
+                <div class="bg-green-100 w-20 h-20 rounded-2xl flex items-center justify-center mb-8 text-4xl">
+                    🛍️
+                </div>
+                <h2 class="md:text-2xl text-3xl font-extrabold text-gray-900 mb-4">Almacen</h2>
+                <p class="text-xl text-gray-600 text-center leading-relaxed">
+                    Salida de productos con control de salida de almacen.
+                </p>
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>

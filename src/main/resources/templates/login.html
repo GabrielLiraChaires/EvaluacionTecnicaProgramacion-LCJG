@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link th:href="@{/styles/output.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div class="login">
+    <div class="h-screen w-screen flex flex-col xl:flex-row justify-center items-center relative overflow-x-hidden overflow-y-auto">
+        <!-- Contenedor del video -->
+        <div class="h-screen w-full xl:w-1/2 flex justify-center items-center relative xl:rounded-tr-[700px] xl:rounded-br-[700px] overflow-hidden bg-transparent contenedor-Video">
+            <video autoplay class="absolute top-0 left-0 w-full h-full object-cover xl:rounded-tr-[700px] xl:rounded-br-[700px]" loop muted playsinline>
+                <source th:src="@{/videos/presentacion.mp4}" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Contenedor del formulario -->
+        <div class="h-screen w-full xl:w-1/2 flex justify-center items-center z-10 xl:relative absolute px-4">
+            <div class="relative p-6 md:p-12 bg-white rounded-xl shadow-2xl w-full max-w-xl min-w-[300px] md:min-w-[450px] mx-4">
+                <!-- Logo responsive -->
+                <div class="absolute -top-16 md:-top-24 left-1/2 transform -translate-x-1/2 z-20">
+                    <div class="bg-white p-2 md:p-3 rounded-full shadow-xl">
+                        <img th:src="@{/images/logo.png}" alt="Logo" class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 md:border-8 border-blue-100 object-contain">
+                    </div>
+                </div>
+
+                <form th:action="@{/login}" method="post" class="mt-16 md:mt-20">
+                    <div class="mb-6 md:mb-8 space-y-4 md:space-y-6">
+                        <!-- Campo Email -->
+                        <div>
+                            <label class="block text-gray-700 text-base md:text-lg font-semibold mb-2 md:mb-3">Correo Electrónico</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-envelope text-gray-400 text-lg md:text-xl"></i>
+                                </div>
+                                <input type="email" name="correo" placeholder="Correo Electrónico"
+                                       class="w-full pl-9 pr-4 py-3 md:py-4 text-base md:text-lg rounded-lg md:rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all"
+                                       required>
+                            </div>
+                        </div>
+
+                        <!-- Campo Contraseña -->
+                        <div>
+                            <label class="block text-gray-700 text-base md:text-lg font-semibold mb-2 md:mb-3">Contraseña</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <i class="fas fa-lock text-gray-400 text-lg md:text-xl"></i>
+                                </div>
+                                <input type="password" name="contrasena" placeholder="Contraseña"
+                                       class="w-full pl-9 pr-4 py-3 md:py-4 text-base md:text-lg rounded-lg md:rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full flex justify-center items-center">
+                        <button type="submit" class="w-1/2 bg-blue-600 hover:bg-blue-700 text-white text-lg md:text-xl font-bold py-4 md:py-4 rounded-lg md:rounded-xl transition-all hover:scale-[1.02]">
+                            Iniciar sesión
+                        </button>
+                    </div>
+
+                    <!-- Mensaje de error -->
+                    <div th:if="${mensajeError}" class="mt-4 p-3 bg-red-700 text-white rounded-lg">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <strong th:text="${mensajeError}"></strong>
+                    </div>
+
+                    <!-- Mensaje de éxito -->
+                    <div th:if="${mensajeExito}" class="mt-4 p-3 bg-blue-600 text-white rounded-lg">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        <strong th:text="${mensajeExito}"></strong>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
