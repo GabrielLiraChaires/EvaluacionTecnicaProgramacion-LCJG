@@ -2,6 +2,8 @@
 
 Aplicación Spring Boot para el control y administración de inventario en almacenes, con gestión de productos, visualización de movimientos y accesos por roles.
 
+Vínculo al video demostrativo: https://drive.google.com/file/d/1VVKzFUh9hezJ43mu4VNUsYXjC-MG6KKy/view?usp=sharing
+
 > **Nota:**  
 > CSRF fue desactivado para agilizar las peticiones. SUGERIDO SOLO EN DESARROLLO POR SUPUESTO.  
 > PasswordEncoder fue omitido para utilizar contraseñas de texto plano. Supuse que así lo solicitaron por la longitud de la cadena en la tabla del usuario, especificada en los requerimientos.
